@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\LoginController;
+use App\Http\Controllers\API\MasukContoroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +17,11 @@ use App\Http\Controllers\API\LoginController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('masuk');
+})->name('/');
+
 
 //login api
-Route::get('login', [LoginController::class, 'login'])->name('login');
+Route::get('masuk', [MasukContoroller::class, 'masuk'])->name('masuk');
+Route::post('masukApi', [MasukContoroller::class, 'masukApi'])->name('masukApi');

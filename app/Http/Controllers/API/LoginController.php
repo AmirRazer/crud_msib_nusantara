@@ -9,22 +9,31 @@ use Termwind\Components\Dd;
 
 class LoginController extends Controller
 {
-    public function login(Request $request)
-    {
-      
+    // public function index()
+    // {
 
-        $response = Http::post('http://127.0.0.1:8000/api/login?',[
-            'headers' => [
-                'Authorization' => 'Bearer '.session()->get('token.access_token')
-            ],
-            'query' => [
-                'email' => 'admin1@gmail.com',
-                'password' => 'admin12345'
-            ],
-        ]);
 
-        $result = json_decode((string)$response->getBody(), true);
-        return dd($result);
-        return view('login');
-    }
+    //     return view('index');
+    // }
+    // public function loginApi(Request $request)
+    // {
+        
+    //     $email = $request->email;
+    //     $password = $request->password;
+
+    //     $response = Http::post('http://127.0.0.1:8000/api/login', [
+    //         'headers' => [
+    //             'Authorization' => 'Bearer ' . session()->get('token.access_token'),
+    //             'Accept' => 'application/json'
+    //         ],
+    //         'query' => [
+    //             'email' => $email,
+    //             'password' => $password
+    //         ],
+
+    //     ]);
+
+    //     $result = json_decode((string)$response->getBody(), true);
+    //     return dd($result);
+    // }
 }

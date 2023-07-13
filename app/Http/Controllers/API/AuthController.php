@@ -7,15 +7,18 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
+
 // new GuzzleHttp\Client;
 
 use function Ramsey\Uuid\v1;
 
 class AuthController extends Controller
 {
-  
+   
     public function register(Request $request)
     {
+
          
 
        $request->validate([
@@ -41,18 +44,9 @@ class AuthController extends Controller
     }
     public function login(Request $request)
     {
-        // return view('login');
-//           $http = new GuzzleHttp\Client;
-//            $response = $http->post('http://localhost:8000/api/register', [
-//             'headers' => [
-//                 'Authorization' => 'Bearer '.session()->get('token.access_token'),
-//             ],
-//             'query' => [
-//                 'email' => $request->email,
-//                 'password' => $request->password,
-//             ],
-//         ])
-// ;
+        
+        
+
 
         $request->validate([
             
@@ -82,5 +76,26 @@ class AuthController extends Controller
        return response()->json([
         'msg' => 'Logout success'
        ]);
+    }
+    public function loginApi(Request $request)
+    {
+        
+        $email = $request->email;
+        $password = $request->password;
+
+        $response = Http::post('http://127.0.0.1:8000/api/login', [
+            'headers' => [
+                'Authorization' => 'Bearer ' . session()->get('token.access_token'),
+                'Accept' => 'application/json'
+            ],
+            'query' => [
+                'email' => $email,
+                'password' => $password
+            ],
+
+        ]);
+
+        $result = json_decode((string)$response->getBody(), true);
+        return dd($result);
     }
 }

@@ -46,13 +46,20 @@
     <br>
     <br>
     <div class="login-form">
-        <form action="" method="post">
+        <form action="{{route('masukApi')}}" method="post">
+            @csrf
             <h2 class="text-center">Log in</h2>
             <div class="form-group">
-                <input type="email" name="email"class="form-control" placeholder="Enter email" required="required">
+                <input type="email" name="email"class="form-control" @error('email') is-invalid @enderror 
+                value="{{old('email')}}" placeholder="Enter email" required="required">
+                @error('email')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                 </span>
+                 @enderror
             </div>
             <div class="form-group">
-                <input type="password" name="email"class="form-control" placeholder="Enter Password" required="required">
+                <input type="password" name="password"class="form-control" placeholder="Enter Password" required="required">
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block">Log in</button>
